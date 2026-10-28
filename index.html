@@ -56,7 +56,7 @@
           <li>Tienes <strong>50 preguntas</strong> organizadas por temas.</li>
           <li><strong>¡Sin errores!</strong> Si te equivocas en una respuesta, el quiz se reiniciará a la pregunta 1.</li>
           <li>Puedes pedirle ayuda al asistente <strong>Professeur Lumi</strong> en el chat.</li>
-          <li><strong>¡Cuidado!</strong> Si le pides a la IA que te dé la respuesta exacta, detectará la trampa y <strong>reiniciará el quiz</strong>.</li>
+          <li><strong>¡Cuidado!</strong> Si le pides al tutor la respuesta exacta, detectará la trampa y <strong>reiniciará el quiz</strong>.</li>
         </ul>
       </div>
 
@@ -113,7 +113,7 @@
               <p class="text-[10px] text-slate-400">Tutor de Francés IA</p>
             </div>
           </div>
-          <span class="text-[10px] bg-slate-700 px-2 py-1 rounded text-slate-300">Gemini AI</span>
+          <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded border border-indigo-500/30">Actif</span>
         </div>
 
         <!-- Chat Messages -->
@@ -149,70 +149,67 @@
   </main>
 
   <script>
-    // Tu API Key integrada
-    const apiKey = "AQ.Ab8RN6IqK4weIF41SkL_iBOHpVJw3ZhIWsZEB9uR85yBLW725w";
-
-    // Base de datos de 50 preguntas
+    // Base de datos de 50 preguntas con pistas pedagógicas
     const questions = [
       // 1. VERBE ÊTRE (1-10)
-      { id: 1, topic: "1. VERBE ËTRE", type: "mc", question: "Complétez: Je _____ étudiant à l'université.", options: ["suis", "es", "est", "sommes"], answer: "suis" },
-      { id: 2, topic: "1. VERBE ËTRE", type: "mc", question: "Choisissez la bonne forme: Tu _____ très sympathique.", options: ["êtes", "es", "est", "suis"], answer: "es" },
-      { id: 3, topic: "1. VERBE ËTRE", type: "fill", question: "Complétez avec le verbe être: Il _____ professeur de français.", answer: "est" },
-      { id: 4, topic: "1. VERBE ËTRE", type: "mc", question: "Complétez: Nous _____ très heureux d'être ici.", options: ["sommes", "êtes", "sont", "suis"], answer: "sommes" },
-      { id: 5, topic: "1. VERBE ËTRE", type: "mc", question: "Choisissez la bonne réponse: Vous _____ en retard.", options: ["êtes", "sommes", "sont", "est"], answer: "êtes" },
-      { id: 6, topic: "1. VERBE ËTRE", type: "fill", question: "Complétez avec le verbe être: Ils _____ à Paris ce week-end.", answer: "sont" },
-      { id: 7, topic: "1. VERBE ËTRE", type: "mc", question: "Quelle est la forme correcte? Elle _____ canadienne.", options: ["est", "es", "suis", "sont"], answer: "est" },
-      { id: 8, topic: "1. VERBE ËTRE", type: "mc", question: "Complétez: Elles _____ très fatiguées après le voyage.", options: ["sont", "sommes", "êtes", "est"], answer: "sont" },
-      { id: 9, topic: "1. VERBE ËTRE", type: "fill", question: "Traduisez le verbe entre parenthèses: (Yo soy) _____ étudiant.", answer: "Je suis" },
-      { id: 10, topic: "1. VERBE ËTRE", type: "mc", question: "Forme négative: Je ne _____ pas français.", options: ["suis", "es", "est", "sommes"], answer: "suis" },
+      { id: 1, topic: "1. VERBE ËTRE", type: "mc", question: "Complétez: Je _____ étudiant à l'université.", options: ["suis", "es", "est", "sommes"], answer: "suis", hint: "Recuerda la conjugación de ÊTRE para la primera persona singular (Je): Je suis." },
+      { id: 2, topic: "1. VERBE ËTRE", type: "mc", question: "Choisissez la bonne forme: Tu _____ très sympathique.", options: ["êtes", "es", "est", "suis"], answer: "es", hint: "Para la segunda persona (Tu), la terminación del verbo ÊTRE termina en '-s'." },
+      { id: 3, topic: "1. VERBE ËTRE", type: "fill", question: "Complétez avec le verbe être: Il _____ professeur de français.", answer: "est", hint: "Para la tercera persona singular (Il/Elle/On), se utiliza 'est'." },
+      { id: 4, topic: "1. VERBE ËTRE", type: "mc", question: "Complétez: Nous _____ très heureux d'être ici.", options: ["sommes", "êtes", "sont", "suis"], answer: "sommes", hint: "Con el pronombre 'Nous' la forma correcta del verbo ÊTRE es 'sommes'." },
+      { id: 5, topic: "1. VERBE ËTRE", type: "mc", question: "Choisissez la bonne réponse: Vous _____ en retard.", options: ["êtes", "sommes", "sont", "est"], answer: "êtes", hint: "La segunda persona del plural (Vous) utiliza 'êtes' (¡atención al acento circunflejo!)." },
+      { id: 6, topic: "1. VERBE ËTRE", type: "fill", question: "Complétez avec le verbe être: Ils _____ à Paris ce week-end.", answer: "sont", hint: "Para el plural masculino (Ils), el verbo ÊTRE es 'sont'." },
+      { id: 7, topic: "1. VERBE ËTRE", type: "mc", question: "Quelle est la forme correcte? Elle _____ canadienne.", options: ["est", "es", "suis", "sont"], answer: "est", hint: "Elle es tercera persona singular, igual que 'Il'." },
+      { id: 8, topic: "1. VERBE ËTRE", type: "mc", question: "Complétez: Elles _____ très fatiguées après le voyage.", options: ["sont", "sommes", "êtes", "est"], answer: "sont", hint: "Elles es tercera persona del plural, coincide con 'Ils'." },
+      { id: 9, topic: "1. VERBE ËTRE", type: "fill", question: "Traduisez le verbe entre parenthèses: (Yo soy) _____ étudiant.", answer: "Je suis", hint: "Traduce la frase completa 'Yo soy' al francés." },
+      { id: 10, topic: "1. VERBE ËTRE", type: "mc", question: "Forme négative: Je ne _____ pas français.", options: ["suis", "es", "est", "sommes"], answer: "suis", hint: "La estructura de la negativa coloca la conjugación de 'Je' entre 'ne' y 'pas'." },
 
       // 2. PRÉPOSITIONS DE LIEU & PAYS (11-20)
-      { id: 11, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: J'habite _____ France.", options: ["en", "au", "aux", "à"], answer: "en" },
-      { id: 12, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Il habite _____ Brésil.", options: ["au", "en", "aux", "à"], answer: "au" },
-      { id: 13, topic: "2. PRÉPOSITIONS DE LIEU", type: "fill", question: "Complétez avec la préposition: Nous allons _____ États-Unis.", answer: "aux" },
-      { id: 14, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Le chat est _____ la table. (debajo)", options: ["sous", "sur", "dans", "devant"], answer: "sous" },
-      { id: 15, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Elle vit _____ Paris.", options: ["à", "en", "au", "dans"], answer: "à" },
-      { id: 16, topic: "2. PRÉPOSITIONS DE LIEU", type: "fill", question: "Complétez avec la préposition: Le livre est _____ le sac. (dentro)", answer: "dans" },
-      { id: 17, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Vous allez _____ Espagne cet été.", options: ["en", "au", "à", "aux"], answer: "en" },
-      { id: 18, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Le cinéma est à côté _____ la banque.", options: ["de", "du", "de la", "des"], answer: "de la" },
-      { id: 19, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Il voyage _____ Mexique.", options: ["au", "en", "à", "aux"], answer: "au" },
-      { id: 20, topic: "2. PRÉPOSITIONS DE LIEU", type: "fill", question: "Complétez: Elles vont _____ Japon.", answer: "au" },
+      { id: 11, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: J'habite _____ France.", options: ["en", "au", "aux", "à"], answer: "en", hint: "Para países femeninos (que terminan en '-e', como France) usamos 'en'." },
+      { id: 12, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Il habite _____ Brésil.", options: ["au", "en", "aux", "à"], answer: "au", hint: "Para países masculinos que no terminan en '-e', utilizamos 'au'." },
+      { id: 13, topic: "2. PRÉPOSITIONS DE LIEU", type: "fill", question: "Complétez avec la préposition: Nous allons _____ États-Unis.", answer: "aux", hint: "Para países en plural (como États-Unis), usamos la preposición 'aux'." },
+      { id: 14, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Le chat est _____ la table. (debajo)", options: ["sous", "sur", "dans", "devant"], answer: "sous", hint: "'Sur' significa sobre/encima, mientras que 'sous' significa debajo." },
+      { id: 15, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Elle vit _____ Paris.", options: ["à", "en", "au", "dans"], answer: "à", hint: "Para ciudades específicas (París, Madrid, Tokio) siempre se usa la preposición 'à'." },
+      { id: 16, topic: "2. PRÉPOSITIONS DE LIEU", type: "fill", question: "Complétez avec la préposition: Le livre est _____ le sac. (dentro)", answer: "dans", hint: "La preposición para 'dentro de' o 'en el interior' es 'dans'." },
+      { id: 17, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Vous allez _____ Espagne cet été.", options: ["en", "au", "à", "aux"], answer: "en", hint: "Espagne es un país femenino (termina en 'e') y empieza por vocal, por lo que usa 'en'." },
+      { id: 18, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Le cinéma est à côté _____ la banque.", options: ["de", "du", "de la", "des"], answer: "de la", hint: "'Banque' es un sustantivo femenino. 'À côté de' + 'la' se mantiene como 'à côté de la'." },
+      { id: 19, topic: "2. PRÉPOSITIONS DE LIEU", type: "mc", question: "Complétez: Il voyage _____ Mexique.", options: ["au", "en", "à", "aux"], answer: "au", hint: "Mexique es una excepción: aunque termina en '-e', es masculino (le Mexique)." },
+      { id: 20, topic: "2. PRÉPOSITIONS DE LIEU", type: "fill", question: "Complétez: Elles vont _____ Japon.", answer: "au", hint: "Japon es un país masculino que no termina en 'e'." },
 
       // 3. VERBE AVOIR (21-30)
-      { id: 21, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: J'_____ 20 ans.", options: ["ai", "as", "a", "avons"], answer: "ai" },
-      { id: 22, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Tu _____ un nouveau téléphone.", options: ["as", "ai", "a", "avez"], answer: "as" },
-      { id: 23, topic: "3. VERBE AVOIR", type: "fill", question: "Complétez avec le verbe avoir: Il _____ deux frères.", answer: "a" },
-      { id: 24, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Nous _____ une belle maison.", options: ["avons", "avez", "ont", "ai"], answer: "avons" },
-      { id: 25, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Vous _____ du travail aujourd'hui?", options: ["avez", "avons", "ont", "as"], answer: "avez" },
-      { id: 26, topic: "3. VERBE AVOIR", type: "fill", question: "Complétez avec le verbe avoir: Ils _____ un chien très mignon.", answer: "ont" },
-      { id: 27, topic: "3. VERBE AVOIR", type: "mc", question: "Expressing age: Elle _____ 15 ans.", options: ["a", "est", "as", "ai"], answer: "a" },
-      { id: 28, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Tu _____ froid?", options: ["as", "es", "a", "ai"], answer: "as" },
-      { id: 29, topic: "3. VERBE AVOIR", type: "fill", question: "Négation avec Avoir: Je n'_____ pas de voiture.", answer: "ai" },
-      { id: 30, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Elles _____ de la chance.", options: ["ont", "sont", "avons", "avez"], answer: "ont" },
+      { id: 21, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: J'_____ 20 ans.", options: ["ai", "as", "a", "avons"], answer: "ai", hint: "Con la primera persona (Je -> J') el verbo AVOIR se conjuga como 'ai'." },
+      { id: 22, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Tu _____ un nouveau téléphone.", options: ["as", "ai", "a", "avez"], answer: "as", hint: "La forma de AVOIR para 'Tu' es 'as'." },
+      { id: 23, topic: "3. VERBE AVOIR", type: "fill", question: "Complétez avec le verbe avoir: Il _____ deux frères.", answer: "a", hint: "Para Il/Elle/On el verbo AVOIR es simplemente la letra 'a'." },
+      { id: 24, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Nous _____ une belle maison.", options: ["avons", "avez", "ont", "ai"], answer: "avons", hint: "Con 'Nous' el verbo AVOIR es 'avons'." },
+      { id: 25, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Vous _____ du travail aujourd'hui?", options: ["avez", "avons", "ont", "as"], answer: "avez", hint: "Con 'Vous' se utiliza 'avez'." },
+      { id: 26, topic: "3. VERBE AVOIR", type: "fill", question: "Complétez avec le verbe avoir: Ils _____ un chien très mignon.", answer: "ont", hint: "Para Ils/Elles se utiliza 'ont' (no confundir con 'sont' del verbo être)." },
+      { id: 27, topic: "3. VERBE AVOIR", type: "mc", question: "Expressing age: Elle _____ 15 ans.", options: ["a", "est", "as", "ai"], answer: "a", hint: "En francés la edad se expresa con el verbo AVOIR (tener), no con ÊTRE (ser/estar)." },
+      { id: 28, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Tu _____ froid?", options: ["as", "es", "a", "ai"], answer: "as", hint: "Tener frío/calor usa AVOIR. Para 'Tu' es 'as'." },
+      { id: 29, topic: "3. VERBE AVOIR", type: "fill", question: "Négation avec Avoir: Je n'_____ pas de voiture.", answer: "ai", hint: "Completa con la forma de AVOIR para 'Je' (J')." },
+      { id: 30, topic: "3. VERBE AVOIR", type: "mc", question: "Complétez: Elles _____ de la chance.", options: ["ont", "sont", "avons", "avez"], answer: "ont", hint: "Elles + AVOIR = ont." },
 
       // 4. VERBES EN -ER (31-40)
-      { id: 31, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Parler': Je _____ français.", options: ["parle", "parles", "parlons", "parlent"], answer: "parle" },
-      { id: 32, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Écouter': Tu _____ de la musique.", options: ["écoutes", "écoute", "écoutez", "écoutent"], answer: "écoutes" },
-      { id: 33, topic: "4. VERBES EN -ER", type: "fill", question: "Conjuguez 'Habiter' pour (Il): Il _____ à Lyon.", answer: "habite" },
-      { id: 34, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Travailler': Nous _____ ensemble.", options: ["travaillons", "travaillez", "travaillent", "travaille"], answer: "travaillons" },
-      { id: 35, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Regarder': Vous _____ la télévision.", options: ["regardez", "regardons", "regardent", "regarde"], answer: "regardez" },
-      { id: 36, topic: "4. VERBES EN -ER", type: "fill", question: "Conjuguez 'Chanter' pour (Ils): Ils _____ très bien.", answer: "chantent" },
-      { id: 37, topic: "4. VERBES EN -ER", type: "mc", question: "Quelle est la terminaison pour 'Nous' dans les verbes en -ER?", options: ["-ons", "-ez", "-ent", "-es"], answer: "-ons" },
-      { id: 38, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Étudier': Elle _____ la médecine.", options: ["étudie", "étudies", "étudions", "étudient"], answer: "étudie" },
-      { id: 39, topic: "4. VERBES EN -ER", type: "fill", question: "Conjuguez 'Manger' pour (Nous): Nous _____ une pizza.", answer: "mangeons" },
-      { id: 40, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Danser': Elles _____ dans la fête.", options: ["dansent", "danse", "dansez", "dansons"], answer: "dansent" },
+      { id: 31, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Parler': Je _____ français.", options: ["parle", "parles", "parlons", "parlent"], answer: "parle", hint: "Los verbos del primer grupo (-ER) eliminan el '-er' y añaden '-e' para 'Je'." },
+      { id: 32, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Écouter': Tu _____ de la musique.", options: ["écoutes", "écoute", "écoutez", "écoutent"], answer: "écoutes", hint: "Para 'Tu', los verbos en -ER terminan en '-es'." },
+      { id: 33, topic: "4. VERBES EN -ER", type: "fill", question: "Conjuguez 'Habiter' pour (Il): Il _____ à Lyon.", answer: "habite", hint: "Para Il/Elle, la terminación es '-e'." },
+      { id: 34, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Travailler': Nous _____ ensemble.", options: ["travaillons", "travaillez", "travaillent", "travaille"], answer: "travaillons", hint: "Para 'Nous', la terminación de los verbos regulares en -ER es '-ons'." },
+      { id: 35, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Regarder': Vous _____ la télévision.", options: ["regardez", "regardons", "regardent", "regarde"], answer: "regardez", hint: "Para 'Vous', la terminación es '-ez'." },
+      { id: 36, topic: "4. VERBES EN -ER", type: "fill", question: "Conjuguez 'Chanter' pour (Ils): Ils _____ très bien.", answer: "chantent", hint: "Para Ils/Elles, la terminación muda es '-ent'." },
+      { id: 37, topic: "4. VERBES EN -ER", type: "mc", question: "Quelle est la terminaison pour 'Nous' dans les verbes en -ER?", options: ["-ons", "-ez", "-ent", "-es"], answer: "-ons", hint: "Piensa en 'parlons', 'chantons', 'habitons'." },
+      { id: 38, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Étudier': Elle _____ la médecine.", options: ["étudie", "étudies", "étudions", "étudient"], answer: "étudie", hint: "Para 'Elle', eliminamos -er y dejamos '-e'." },
+      { id: 39, topic: "4. VERBES EN -ER", type: "fill", question: "Conjuguez 'Manger' pour (Nous): Nous _____ une pizza.", answer: "mangeons", hint: "Los verbos en -ger añaden una 'e' antes de '-ons' para mantener el sonido suave: 'mangeons'." },
+      { id: 40, topic: "4. VERBES EN -ER", type: "mc", question: "Conjuguez 'Danser': Elles _____ dans la fête.", options: ["dansent", "danse", "dansez", "dansons"], answer: "dansent", hint: "La terminación plural para Elles es '-ent'." },
 
       // 5. AIMER - GRAMMAIRE & SYNTAXE (41-50)
-      { id: 41, topic: "5. AIMER", type: "mc", question: "Complétez: J'_____ le chocolat.", options: ["aime", "aimes", "aimons", "aiment"], answer: "aime" },
-      { id: 42, topic: "5. AIMER", type: "mc", question: "Pourquoi écrit-on 'J'aime' au lieu de 'Je aime'?", options: ["À cause de l'élision devant une voyelle", "C'est une exception du verbe être", "Pour le pluriel", "C'est une forme négative"], answer: "À cause de l'élision devant une voyelle" },
-      { id: 43, topic: "5. AIMER", type: "mc", question: "Complétez: Tu _____ lire des livres?", options: ["aimes", "aime", "aimez", "aimons"], answer: "aimes" },
-      { id: 44, topic: "5. AIMER", type: "fill", question: "Conjuguez 'Aimer': Nous _____ voyager en Europe.", answer: "aimons" },
-      { id: 45, topic: "5. AIMER", type: "mc", question: "Complétez: Vous _____ le cinéma français?", options: ["aimez", "aimons", "aiment", "aimes"], answer: "aimez" },
-      { id: 46, topic: "5. AIMER", type: "mc", question: "Complétez: Ils _____ jouer au football.", options: ["aiment", "aimons", "aimez", "aime"], answer: "aiment" },
-      { id: 47, topic: "5. AIMER", type: "mc", question: "Structure avec un verbe à l'infinitif: Elle aime _____.", options: ["danser", "danse", "danses", "dansons"], answer: "danser" },
-      { id: 48, topic: "5. AIMER", type: "fill", question: "Forme négative: Je n'_____ pas les araignées.", answer: "aime" },
-      { id: 49, topic: "5. AIMER", type: "mc", question: "Choisissez la phrase correcte:", options: ["J'aime étudier le français", "Je aime étudier le français", "J'aimons étudier le français", "J'aimes étudier le français"], answer: "J'aime étudier le français" },
-      { id: 50, topic: "5. AIMER", type: "mc", question: "Complétez: Est-ce qu'elle _____ la cuisine italienne?", options: ["aime", "aimes", "aimons", "aiment"], answer: "aime" }
+      { id: 41, topic: "5. AIMER", type: "mc", question: "Complétez: J'_____ le chocolat.", options: ["aime", "aimes", "aimons", "aiment"], answer: "aime", hint: "Aimer es un verbo regular en -ER. Para 'Je' es 'aime'." },
+      { id: 42, topic: "5. AIMER", type: "mc", question: "Pourquoi écrit-on 'J'aime' au lieu de 'Je aime'?", options: ["À cause de l'élision devant une voyelle", "C'est une exception du verbe être", "Pour le pluriel", "C'est une forme négative"], answer: "À cause de l'élision devant une voyelle", hint: "Cuando el verbo empieza por vocal (a, e, i, o, u), el pronombre 'Je' pierde su 'e' (élision) y se pone apóstrofe." },
+      { id: 43, topic: "5. AIMER", type: "mc", question: "Complétez: Tu _____ lire des livres?", options: ["aimes", "aime", "aimez", "aimons"], answer: "aimes", hint: "Para 'Tu' la conjugación de Aimer termina en '-s'." },
+      { id: 44, topic: "5. AIMER", type: "fill", question: "Conjuguez 'Aimer': Nous _____ voyager en Europe.", answer: "aimons", hint: "Para 'Nous', la terminación es '-ons'." },
+      { id: 45, topic: "5. AIMER", type: "mc", question: "Complétez: Vous _____ le cinéma français?", options: ["aimez", "aimons", "aiment", "aimes"], answer: "aimez", hint: "Para 'Vous', la terminación de Aimer es '-ez'." },
+      { id: 46, topic: "5. AIMER", type: "mc", question: "Complétez: Ils _____ jouer au football.", options: ["aiment", "aimons", "aimez", "aime"], answer: "aiment", hint: "Para 'Ils', la terminación es '-ent'." },
+      { id: 47, topic: "5. AIMER", type: "mc", question: "Structure avec un verbe à l'infinitif: Elle aime _____.", options: ["danser", "danse", "danses", "dansons"], answer: "danser", hint: "Cuando dos verbos van juntos y el primero ya está conjugado (aime), el segundo va en infinitivo (-er)." },
+      { id: 48, topic: "5. AIMER", type: "fill", question: "Forme négative: Je n'_____ pas les araignées.", answer: "aime", hint: "Entre 'n'' y 'pas' va el verbo conjugado para 'Je'." },
+      { id: 49, topic: "5. AIMER", type: "mc", question: "Choisissez la phrase correcte:", options: ["J'aime étudier le français", "Je aime étudier le français", "J'aimons étudier le français", "J'aimes étudier le français"], answer: "J'aime étudier le français", hint: "Aplica la regla de la élision (J'aime) y la forma correcta para la primera persona." },
+      { id: 50, topic: "5. AIMER", type: "mc", question: "Complétez: Est-ce qu'elle _____ la cuisine italienne?", options: ["aime", "aimes", "aimons", "aiment"], answer: "aime", hint: "Sujeto 'elle' -> forma del verbo terminada en '-e'." }
     ];
 
     let currentQIndex = 0;
@@ -286,7 +283,7 @@
       if (selected.toLowerCase() === q.answer.toLowerCase()) {
         nextQuestion();
       } else {
-        triggerRestart(`¡Respuesta incorrecta! Dijiste "${selected}". La regla es estricta: volvemos al inicio.`);
+        triggerRestart(`¡Respuesta incorrecta! Seleccionaste "${selected}". La regla del quiz es estricta: volvemos a la pregunta 1.`);
       }
     }
 
@@ -315,10 +312,10 @@
       alert(`❌ REINICIO DE QUIZ:\n\n${reason}`);
       currentQIndex = 0;
       loadQuestion();
-      appendChatMessage("Professeur Lumi", "⚠️ El quiz se ha reiniciado. ¡Ánimo, inténtalo de nuevo!", "system");
+      appendChatMessage("Professeur Lumi", "⚠️ El quiz se ha reiniciado. ¡Ánimo, inténtalo de nuevo desde la pregunta 1!", "system");
     }
 
-    async function handleChatSubmit(e) {
+    function handleChatSubmit(e) {
       e.preventDefault();
       const text = chatInput.value.trim();
       if (!text) return;
@@ -326,53 +323,37 @@
       appendChatMessage("Tú", text, "user");
       chatInput.value = '';
 
-      const cheatKeywords = ["dame la respuesta", "dame la solución", "cuál es la respuesta", "dime la respuesta", "give me the answer", "tell me the answer", "respuesta exacta"];
+      // Regla anti-trampas
+      const cheatKeywords = ["dame la respuesta", "dame la solucion", "dame la solución", "cuál es la respuesta", "cual es la respuesta", "dime la respuesta", "respuesta exacta", "give me the answer"];
       const isCheating = cheatKeywords.some(kw => text.toLowerCase().includes(kw));
 
       if (isCheating) {
-        triggerRestart("Has pedido la respuesta exacta al Tutor. Está prohibido pedir respuestas directas.");
+        triggerRestart("Has intentado pedir la respuesta directa. Las reglas del quiz prohíben pedir respuestas exactas.");
         return;
       }
 
-      const typingId = appendChatMessage("Professeur Lumi", "Pensando...", "bot-typing");
+      // Respuesta pedagógica del tutor
+      const q = questions[currentQIndex];
+      let reply = "";
 
-      try {
-        const q = questions[currentQIndex];
-        const systemPrompt = `Eres Professeur Lumi, un tutor amigable de francés para estudiantes.
-El estudiante está respondiendo un quiz de francés. 
-Pregunta actual: "${q.question}"
-Tema actual: "${q.topic}"
-Respuesta correcta (SECRET): "${q.answer}"
-
-REGLAS STRICTAS:
-1. NUNCA des la respuesta correcta directamente ni la reveles explícitamente.
-2. Si el usuario te pide la respuesta directa, responde brevemente negándote y adviértelo.
-3. Explica reglas gramaticales, da pistas subtle, o explica el concepto en español de manera muy clara y amigable.
-4. Mantén las respuestas cortas y al punto (máximo 2-3 frases).`;
-
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [
-              { role: 'user', parts: [{ text: `${systemPrompt}\n\nMensaje del estudiante: ${text}` }] }
-            ]
-          })
-        });
-
-        const data = await response.json();
-        removeChatMessage(typingId);
-
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-          const reply = data.candidates[0].content.parts[0].text;
-          appendChatMessage("Professeur Lumi", reply, "bot");
-        } else {
-          appendChatMessage("Professeur Lumi", "Lo siento, tuve un problema al procesar tu duda.", "bot");
-        }
-      } catch (err) {
-        removeChatMessage(typingId);
-        appendChatMessage("Professeur Lumi", "Error de conexión con el Tutor.", "bot");
+      const query = text.toLowerCase();
+      if (query.includes("pista") || query.includes("ayuda") || query.includes("explic") || query.includes("como") || query.includes("por que")) {
+        reply = `💡 <strong>Pista para la Pregunta ${currentQIndex + 1}:</strong> ${q.hint}`;
+      } else if (query.includes("être") || query.includes("etre")) {
+        reply = "📘 <strong>Regla del Verbo Être:</strong> Je suis, Tu es, Il/Elle est, Nous sommes, Vous êtes, Ils/Elles sont.";
+      } else if (query.includes("avoir")) {
+        reply = "📘 <strong>Regla del Verbo Avoir:</strong> J'ai, Tu as, Il/Elle a, Nous avons, Vous avez, Ils/Elles ont.";
+      } else if (query.includes("er") || query.includes("verbo")) {
+        reply = "📘 <strong>Verbos en -ER:</strong> Se elimina el '-er' y se añaden las terminaciones: -e, -es, -e, -ons, -ez, -ent.";
+      } else if (query.includes("pais") || query.includes("país") || query.includes("preposicion")) {
+        reply = "🌍 <strong>Preposiciones de Lugar:</strong> 'en' para países femeninos (-e), 'au' para masculinos, 'aux' para plurales, y 'à' para ciudades.";
+      } else {
+        reply = `💡 <strong>Pista del Professeur Lumi:</strong> Analiza el sujeto de la oración. ${q.hint}`;
       }
+
+      setTimeout(() => {
+        appendChatMessage("Professeur Lumi", reply, "bot");
+      }, 400);
     }
 
     function appendChatMessage(sender, message, type) {
@@ -392,11 +373,6 @@ REGLAS STRICTAS:
       chatMessages.appendChild(msgDiv);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       return id;
-    }
-
-    function removeChatMessage(id) {
-      const el = document.getElementById(id);
-      if (el) el.remove();
     }
   </script>
 </body>
